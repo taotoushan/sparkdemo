@@ -23,6 +23,11 @@ object App {
     case class ProductProperty(val name: String, val price: Double) extends VertexProperty
 
 
+
+
+
+
+
     val users: RDD[(VertexId, (String, String))] =
       sc.parallelize(Array((3L, ("rxin", "student")), (7L, ("jgonzal", "postdoc")),
         (5L, ("franklin", "prof")), (2L, ("istoica", "prof"))))
@@ -36,11 +41,10 @@ object App {
     // Build the initial Graph
     val graph = Graph(users, relationships, defaultUser)
 
-    val cnt = graph.vertices.filter {
+    graph.vertices.filter {
       case (a, (b, c)) => c == "student"
-    }.count
+    }.foreach(println)
 
-    print("" + cnt)
   }
 }
 
